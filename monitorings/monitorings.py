@@ -33,34 +33,43 @@ class OfficeWarrior:
 
 
 w1 = OfficeWarrior('Andrew', 100, random.randrange(1, 20))
-w2 = OfficeWarrior('Nicola', 100, random.randrange(1, 20))
-warriors = (w1, w2)
+w2 = OfficeWarrior('Nicola', 125, random.randrange(1, 20))
+w3 = OfficeWarrior('Lisyj', 100, random.randrange(1, 20))
+w4 = OfficeWarrior('Illia', 100, random.randrange(1, 20))
+
+warriors_1 = (w1, w2)
+warriors_2 = (w3, w4)
 
 
-def select_zad(warriors):
-    first = random.choice(warriors)
-    if first == w1:
-        second = w2
-    else:
-        second = w1
+def select_zad(warriors_1, warriors_2):
+    first = random.choice(warriors_1)
+    second = random.choice(warriors_2)
     return first, second
 
 
 def fight(first, second):
-    if second.health or first.health != 0:
-        while second.health and first.health > 0:
+     
+     if second.health or first.health > 1:
 
-            if first.dmg > second.health:
-                first.dmg = second.health
-            first.attack(second)
-            print('Офисный крыс: {} получил монитором по ебалу от {} и его здоровье: {}'.format(second.name, first.name, second.health))
+        while second.health and first.health > 1:
 
-            if second.dmg > first.health:
-                second.dmg = first.health
-            second.attack(first)
-            print('Офисный крыс: {} получил монитором по ебалу от {} и его здоровье: {}'.format(first.name, second.name, first.health))
+            if first.health > 1:
 
+                    if second.dmg > first.health:
+                        second.dmg = first.health
+                    second.attack(first)
+                    print('Офисный крыс: {} получил монитором по ебалу от {} и его здоровье: {}'.format(first.name, second.name, first.health))
 
-sz = select_zad(warriors)
+            if second.health > 1:
+
+                    if first.dmg > second.health:
+                        first.dmg = second.health
+                    first.attack(second)
+                    print('Офисный крыс: {} получил монитором по ебалу от {} и его здоровье: {}'.format(second.name, first.name, second.health))
+
+     else:
+         print('GAME OVER')
+
+sz = select_zad(warriors_1, warriors_2)
 fight(sz[0], sz[1])
 
